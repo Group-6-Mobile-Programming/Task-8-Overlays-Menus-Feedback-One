@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Placeholder picture of the delivery map. The logic team replaces it with a real map. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="1316dp" android:height="913dp"
+    android:viewportWidth="1316" android:viewportHeight="913">
+    <path android:fillColor="#E3EAE5" android:pathData="M0,0h1316v913h-1316z"/>
+    <!-- roads -->
+    <path android:fillColor="#00000000" android:strokeColor="#FFFFFF" android:strokeWidth="16"
+        android:pathData="M0,112 H1316 M0,452 H1316 M0,802 H1316 M103,0 V913 M563,0 V913 M1060,0 V913"/>
+    <!-- Katwe -->
+    <path android:fillColor="#F1F4F1" android:strokeColor="#8A9A92" android:strokeWidth="2"
+        android:pathData="M157,478 L525,446 L580,713 L200,780 Z"/>
+    <!-- Bwaise -->
+    <path android:fillColor="#F1F4F1" android:strokeColor="#8A9A92" android:strokeWidth="2"
+        android:pathData="M580,178 L814,222 L781,490 L603,468 Z"/>
+    <!-- Kisenyi (selected zone) -->
+    <path android:fillColor="#C9DDD3" android:strokeColor="#116B4C" android:strokeWidth="4"
+        android:pathData="M135,168 L468,133 L522,368 L222,423 Z"/>
+    <!-- empty markers -->
+    <path android:fillColor="#F1F4F1" android:strokeColor="#6E7D75" android:strokeWidth="4"
+        android:pathData="M657,278m-12,0a12,12 0 1,0 24,0a12,12 0 1,0 -24,0 M736,323m-12,0a12,12 0 1,0 24,0a12,12 0 1,0 -24,0 M691,389m-12,0a12,12 0 1,0 24,0a12,12 0 1,0 -24,0 M747,423m-12,0a12,12 0 1,0 24,0a12,12 0 1,0 -24,0 M257,546m-12,0a12,12 0 1,0 24,0a12,12 0 1,0 -24,0 M390,513m-12,0a12,12 0 1,0 24,0a12,12 0 1,0 -24,0 M480,596m-12,0a12,12 0 1,0 24,0a12,12 0 1,0 -24,0 M345,657m-12,0a12,12 0 1,0 24,0a12,12 0 1,0 -24,0 M446,680m-12,0a12,12 0 1,0 24,0a12,12 0 1,0 -24,0"/>
+    <!-- Kisenyi stops -->
+    <path android:fillColor="#116B4C" android:strokeColor="#FFFFFF" android:strokeWidth="5"
+        android:pathData="M211,222m-15,0a15,15 0 1,0 30,0a15,15 0 1,0 -30,0 M334,194m-15,0a15,15 0 1,0 30,0a15,15 0 1,0 -30,0 M424,256m-15,0a15,15 0 1,0 30,0a15,15 0 1,0 -30,0 M289,323m-15,0a15,15 0 1,0 30,0a15,15 0 1,0 -30,0 M390,356m-15,0a15,15 0 1,0 30,0a15,15 0 1,0 -30,0"/>
+</vector>

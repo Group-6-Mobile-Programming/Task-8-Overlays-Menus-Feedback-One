@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Issue option: outlined when off, green outline and tint when selected -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_checked="true">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/mk_green_tint"/>
+            <stroke android:width="2dp" android:color="@color/mk_green"/>
+            <corners android:radius="18dp"/>
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/mk_white"/>
+            <stroke android:width="2dp" android:color="@color/mk_option_stroke"/>
+            <corners android:radius="18dp"/>
+        </shape>
+    </item>
+</selector>
