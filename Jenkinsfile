@@ -79,4 +79,3 @@ pipeline {
             echo 'Build failed - check the Console Output for the first red error.'
         }
     }
-}
