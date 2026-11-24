@@ -39,6 +39,10 @@ public class ReportIssueSheetFragment extends BottomSheetDialogFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        // Transition ends when sheet 2 draws its first frame
+        PerfTracker.stopOnFirstDraw(view, PerfTracker.TRACE_REPORT_TRANSITION);
+
         // TEMPORARY wiring for testing the UI only
         view.findViewById(R.id.btnSubmitReport).setOnClickListener(v -> dismiss());
         view.findViewById(R.id.btnCancelReport).setOnClickListener(v -> dismiss());

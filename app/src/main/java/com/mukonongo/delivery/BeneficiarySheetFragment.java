@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -34,18 +35,43 @@ public class BeneficiarySheetFragment extends BottomSheetDialogFragment {
     public void onStart() {
         super.onStart();
         if (getDialog() instanceof BottomSheetDialog) {
+            BottomSheetBehavior<FrameLayout> behavior = ((BottomSheetDialog) getDialog()).getBehavior();
+
+            // Journey ends when the sheet has finished expanding to half-screen.
+            behavior.addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+                @Override
+                public void onStateChanged(@NonNull View bottomSheet, int newState) {
+                    if (newState == BottomSheetBehavior.STATE_HALF_EXPANDED) {
+                        PerfTracker.stop(PerfTracker.TRACE_SCAN_JOURNEY);
+                    }
+                }
+
+                @Override
+                public void onSlide(@NonNull View bottomSheet, float slideOffset) { }
+            });
+
             // Half-screen height (ratio is set in styles.xml: behavior_halfExpandedRatio)
-            ((BottomSheetDialog) getDialog()).getBehavior()
-                    .setState(BottomSheetBehavior.STATE_HALF_EXPANDED);
+            behavior.setState(BottomSheetBehavior.STATE_HALF_EXPANDED);
         }
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        // Render time = sheet requested -> first draw with the profile content
+        PerfTracker.stopOnFirstDraw(view, PerfTracker.TRACE_SHEET_RENDER);
+
         // TEMPORARY wiring for testing the UI only
-        view.findViewById(R.id.btnConfirmDelivery).setOnClickListener(v -> dismiss());
+        view.findViewById(R.id.btnConfirmDelivery).setOnClickListener(v -> {
+            PerfTracker.start(PerfTracker.TRACE_CONFIRM_DELIVERY);
+            dismiss();
+            // TODO (logic team): move this stop() into the real action's success callback,
+            // and use "error" in the failure callback. For now it stops instantly (~0 ms).
+            PerfTracker.stop(PerfTracker.TRACE_CONFIRM_DELIVERY, "outcome", "success");
+        });
         view.findViewById(R.id.btnReportIssue).setOnClickListener(v -> {
+            PerfTracker.start(PerfTracker.TRACE_REPORT_TRANSITION); // stopped in ReportIssueSheetFragment
             dismiss();
             new ReportIssueSheetFragment().show(requireActivity().getSupportFragmentManager(),
                     ReportIssueSheetFragment.TAG);
