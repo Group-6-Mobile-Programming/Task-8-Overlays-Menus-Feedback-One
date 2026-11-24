@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Mukono NGO Delivery</string>
+    <string name="label_volunteer">Mukono Volunteer</string>
+    <string name="label_coordinator">Mukono Coordinator</string>
+
+    <!-- Scan -->
+    <string name="scan_title">Scan QR code</string>
+    <string name="scan_hint">Align the QR code inside the frame</string>
+    <string name="navigate_back">Back</string>
+    <string name="scan_frame_description">QR code scanning frame</string>
+
+    <!-- Beneficiary sheet -->
+    <string name="sample_initials">NG</string>
+    <string name="sample_beneficiary_name">Nakato Grace</string>
+    <string name="beneficiary_role">Beneficiary</string>
+    <string name="household_size_label">Household size</string>
+    <string name="sample_household_size">6 people</string>
+    <string name="dietary_restrictions_label">Dietary restrictions</string>
+    <string name="diet_halal">Halal</string>
+    <string name="diet_diabetic">Diabetic</string>
+    <string name="btn_confirm_delivery">Confirm Delivery</string>
+    <string name="btn_report_issue">Report Issue</string>
+
+    <!-- Report issue sheet -->
+    <string name="report_title">Report Issue</string>
+    <string name="report_what_went_wrong">What went wrong?</string>
+    <string name="issue_wrong_person">Wrong Person</string>
+    <string name="issue_address_changed">Address Changed</string>
+    <string name="issue_no_show">No Show</string>
+    <string name="report_details_label">Details</string>
+    <string name="report_details_hint">Add details</string>
+    <string name="btn_submit_report">Submit Report</string>
+    <string name="btn_cancel">Cancel</string>
+
+    <!-- Coordinator map and manifest -->
+    <string name="map_title">Delivery map</string>
+    <string name="map_city">Kampala</string>
+    <string name="map_placeholder_description">Delivery map area</string>
+    <string name="manifest_title">Delivery manifest</string>
+    <string name="manifest_subtitle">Tue 17 Nov 2026 · 5 stops in Kisenyi</string>
+    <string name="close_manifest">Close manifest</string>
+    <string name="filter_by_zone">Filter by zone</string>
+    <string name="zone_all">All</string>
+    <string name="zone_kisenyi">Kisenyi</string>
+    <string name="zone_katwe">Katwe</string>
+    <string name="zone_bwaise">Bwaise</string>
+    <string name="column_beneficiary">Beneficiary</string>
+    <string name="column_volunteer">Volunteer</string>
+    <string name="status_pending">Pending</string>
+    <string name="status_delivered">Delivered</string>
+</resources>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.Mukono" parent="Theme.Material3.Light.NoActionBar">
+        <item name="colorPrimary">@color/mk_green</item>
+        <item name="colorOnPrimary">@color/mk_white</item>
+        <item name="colorSurface">@color/mk_white</item>
+        <item name="android:windowBackground">@color/mk_white</item>
+        <item name="android:statusBarColor">@color/mk_green_dark</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <!-- Default theme for all modal bottom sheets -->
+        <item name="bottomSheetDialogTheme">@style/ThemeOverlay.Mukono.BottomSheetDialog</item>
+    </style>
+
+    <!-- Dark camera screen -->
+    <style name="Theme.Mukono.Scan">
+        <item name="android:windowBackground">@color/mk_bg_dark</item>
+        <item name="android:statusBarColor">@color/mk_bg_dark</item>
+        <item name="android:navigationBarColor">@color/mk_bg_dark</item>
+    </style>
+
+    <!-- ===== Bottom sheet 1: beneficiary profile. Opens at half screen, can be dragged or dismissed. ===== -->
+    <style name="ThemeOverlay.Mukono.BottomSheetDialog" parent="ThemeOverlay.Material3.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/Widget.Mukono.BottomSheet.Half</item>
+    </style>
+
+    <style name="Widget.Mukono.BottomSheet.Half" parent="Widget.Material3.BottomSheet.Modal">
+        <item name="backgroundTint">@color/mk_white</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.Mukono.Sheet</item>
+        <item name="behavior_fitToContents">false</item>
+        <item name="behavior_halfExpandedRatio">0.5</item>
+        <item name="behavior_skipCollapsed">true</item>
+        <item name="behavior_hideable">true</item>
+    </style>
+
+    <!-- ===== Bottom sheet 2: report issue. Cannot be dismissed by accident. ===== -->
+    <style name="ThemeOverlay.Mukono.BottomSheetDialog.Report" parent="ThemeOverlay.Mukono.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/Widget.Mukono.BottomSheet.Locked</item>
+        <item name="android:windowCloseOnTouchOutside">false</item>
+        <item name="android:windowSoftInputMode">adjustResize</item>
+    </style>
+
+    <style name="Widget.Mukono.BottomSheet.Locked" parent="Widget.Material3.BottomSheet.Modal">
+        <item name="backgroundTint">@color/mk_white</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.Mukono.Sheet</item>
+        <item name="behavior_fitToContents">true</item>
+        <item name="behavior_skipCollapsed">true</item>
+        <!-- No swipe-down to close, and no dragging while typing in the text field -->
+        <item name="behavior_hideable">false</item>
+        <item name="behavior_draggable">false</item>
+    </style>
+
+    <style name="ShapeAppearance.Mukono.Sheet" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">28dp</item>
+        <item name="cornerSizeTopRight">28dp</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+    </style>
+
+    <!-- Text styles -->
+    <style name="Mk.Text.Label" parent="">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/mk_text_secondary</item>
+    </style>
+
+    <!-- Zone filter chips: outlined when off, solid green when selected -->
+    <style name="Mk.Chip" parent="Widget.Material3.Chip.Filter">
+        <item name="chipBackgroundColor">@color/chip_bg</item>
+        <item name="chipStrokeColor">@color/chip_stroke</item>
+        <item name="chipStrokeWidth">2dp</item>
+        <item name="chipMinHeight">44dp</item>
+        <item name="chipCornerRadius">22dp</item>
+        <item name="checkedIconVisible">false</item>
+        <item name="android:textColor">@color/chip_text</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- Dietary restriction tags (read-only) -->
+    <style name="Mk.Chip.Diet" parent="Widget.Material3.Chip.Assist">
+        <item name="chipBackgroundColor">@color/mk_diet_bg</item>
+        <item name="chipStrokeWidth">0dp</item>
+        <item name="chipMinHeight">38dp</item>
+        <item name="chipCornerRadius">19dp</item>
+        <item name="android:textColor">@color/mk_diet_text</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+</resources>

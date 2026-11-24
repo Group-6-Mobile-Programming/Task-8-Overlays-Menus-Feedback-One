@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="mk_green">#116B4C</color>
+    <color name="mk_green_dark">#0E5A40</color>
+    <color name="mk_green_tint">#E8F4EE</color>
+    <color name="mk_avatar_bg">#E3F1EA</color>
+    <color name="mk_bg_dark">#101D17</color>
+    <color name="mk_frame">#4A7A63</color>
+    <color name="mk_hint">#7F9087</color>
+    <color name="mk_qr">#6F7F77</color>
+    <color name="mk_white">#FFFFFF</color>
+    <color name="mk_toolbar_text">#E6EFEA</color>
+
+    <color name="mk_text">#14201A</color>
+    <color name="mk_text_secondary">#5F6E67</color>
+    <color name="mk_outline">#5A6B63</color>
+    <color name="mk_option_stroke">#D6DEDA</color>
+    <color name="mk_card">#F6F8F7</color>
+    <color name="mk_card_stroke">#DDE3E0</color>
+    <color name="mk_divider">#E2E7E4</color>
+    <color name="mk_handle">#C9D3CE</color>
+    <color name="mk_diet_bg">#FDF0D0</color>
+    <color name="mk_diet_text">#6B4A00</color>
+    <color name="mk_close_bg">#EEF3F0</color>
+    <color name="mk_map_bg">#E3EAE5</color>
+</resources>
