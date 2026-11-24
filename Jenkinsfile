@@ -62,6 +62,22 @@ pipeline {
             }
         }
 
+        stage('Check Firebase config') {
+            steps {
+                // Fails in 1 second with a clear message instead of 40 seconds into Gradle.
+                // Prints only the file size and a yes/no, never the contents.
+                script {
+                    if (isUnix()) {
+                        sh 'wc -c app/google-services.json'
+                        sh 'grep -q project_info app/google-services.json || (echo "ERROR: no project_info in google-services.json - the Jenkins credential is not a real Firebase file" && exit 1)'
+                    } else {
+                        bat 'for %%I in ("app\\google-services.json") do echo google-services.json size: %%~zI bytes'
+                        bat 'findstr /C:"project_info" "app\\google-services.json" >nul || (echo ERROR: no project_info in google-services.json - the Jenkins credential is not a real Firebase file & exit /b 1)'
+                    }
+                }
+            }
+        }
+
         stage('Build debug APK') {
             steps {
                 script { gradle('clean assembleDebug') }
