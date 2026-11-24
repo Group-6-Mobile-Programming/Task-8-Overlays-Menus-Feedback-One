@@ -3,10 +3,7 @@ def gradle(String args) {
     if (isUnix()) {
         sh "./gradlew ${args}"
     } else {
-        bat """
-            set "PATH=${env.JAVA_HOME}\\bin;%PATH%"
-            gradlew.bat ${args}
-        """
+        bat "gradlew.bat ${args}"
     }
 }
 
@@ -17,6 +14,7 @@ pipeline {
         timestamps()
         timeout(time: 30, unit: 'MINUTES')
         buildDiscarder(logRotator(numToKeepStr: '10'))
+        skipDefaultCheckout(true)   // the Checkout stage below does it once
     }
 
     triggers {
@@ -25,7 +23,6 @@ pipeline {
 
     environment {
         GRADLE_OPTS = '-Dorg.gradle.daemon=false'
-        JAVA_HOME   = 'C:\\Program Files\\Android\\Android Studio\\jbr'
     }
 
     stages {
@@ -42,12 +39,25 @@ pipeline {
                         sh 'java -version'
                         sh 'chmod +x gradlew'
                     } else {
-                        bat '''
-                            set "PATH=%JAVA_HOME%\\bin;%PATH%"
-                            java -version
-                        '''
+                        bat 'java -version'
                     }
                     gradle('--version')
+                }
+            }
+        }
+
+        stage('Inject Firebase config') {
+            steps {
+                // Keeps google-services.json out of the public repo.
+                // Single quotes on purpose: the secret path must not be interpolated by Groovy.
+                withCredentials([file(credentialsId: 'google-services-json', variable: 'GS_JSON')]) {
+                    script {
+                        if (isUnix()) {
+                            sh 'cp "$GS_JSON" app/google-services.json'
+                        } else {
+                            bat 'copy /Y "%GS_JSON%" "app\\google-services.json"'
+                        }
+                    }
                 }
             }
         }
