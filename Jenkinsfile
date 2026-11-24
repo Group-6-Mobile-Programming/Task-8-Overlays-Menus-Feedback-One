@@ -3,7 +3,10 @@ def gradle(String args) {
     if (isUnix()) {
         sh "./gradlew ${args}"
     } else {
-        bat "gradlew.bat ${args}"
+        bat """
+            set "PATH=${env.JAVA_HOME}\\bin;%PATH%"
+            gradlew.bat ${args}
+        """
     }
 }
 
@@ -22,6 +25,7 @@ pipeline {
 
     environment {
         GRADLE_OPTS = '-Dorg.gradle.daemon=false'
+        JAVA_HOME   = 'C:\\Program Files\\Android\\Android Studio\\jbr'
     }
 
     stages {
@@ -38,7 +42,10 @@ pipeline {
                         sh 'java -version'
                         sh 'chmod +x gradlew'
                     } else {
-                        bat 'java -version'
+                        bat '''
+                            set "PATH=%JAVA_HOME%\\bin;%PATH%"
+                            java -version
+                        '''
                     }
                     gradle('--version')
                 }
