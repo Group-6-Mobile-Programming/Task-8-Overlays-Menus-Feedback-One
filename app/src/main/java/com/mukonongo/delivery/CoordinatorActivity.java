@@ -3,8 +3,8 @@ package com.mukonongo.delivery;
 import android.os.Bundle;
 import android.view.View;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.sidesheet.SideSheetBehavior;
@@ -13,6 +13,8 @@ import com.google.android.material.sidesheet.SideSheetCallback;
 // UI skeleton. Map, manifest data, zone filtering and volunteer reassignment are added by the logic team.
 public class CoordinatorActivity extends AppCompatActivity {
 
+    private RecyclerView rvManifest;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,8 +22,12 @@ public class CoordinatorActivity extends AppCompatActivity {
 
         PerfTracker.init(this);
 
-        // Manifest load: screen open -> list drawn with data. Stopped in onManifestLoaded().
+        // Manifest load: screen open -> list drawn WITH data. Stopped in onManifestLoaded().
         PerfTracker.start(PerfTracker.TRACE_MANIFEST_LOAD);
+
+        // Jank tracking: one trace per scroll gesture (total / slow / frozen frames)
+        rvManifest = findViewById(R.id.rvManifest);
+        PerfTracker.trackScrollJank(rvManifest, PerfTracker.TRACE_MANIFEST_SCROLL);
 
         // TEMPORARY wiring for testing the UI only: the side sheet opens at start,
         // the X button closes it, and tapping the "Delivery map" card opens it again.
@@ -54,17 +60,16 @@ public class CoordinatorActivity extends AppCompatActivity {
         });
     }
 
-    // ---- Performance hooks: call these from the real manifest code ----
+    // ---- Performance hook: the logic team calls this ----
 
-    /** Call ONCE right after the manifest RecyclerView is set up. Tracks slow/frozen frames per scroll. */
-    private void trackManifestScroll(RecyclerView manifestList) {
-        PerfTracker.trackScrollJank(manifestList, PerfTracker.TRACE_MANIFEST_SCROLL);
-    }
-
-    /** Call right after the adapter receives the manifest data. */
-    private void onManifestLoaded(RecyclerView manifestList, int itemCount) {
+    /**
+     * Call right after the manifest data has been given to the adapter
+     * (e.g. adapter.submitList(list) or notifyDataSetChanged()).
+     * Also call it again after zone-filter changes if you want filter time tracked.
+     */
+    private void onManifestLoaded(int itemCount) {
         PerfTracker.putAttribute(PerfTracker.TRACE_MANIFEST_LOAD, "item_count", String.valueOf(itemCount));
-        PerfTracker.stopOnFirstDraw(manifestList, PerfTracker.TRACE_MANIFEST_LOAD);
+        PerfTracker.stopOnFirstDraw(rvManifest, PerfTracker.TRACE_MANIFEST_LOAD);
     }
 
     @Override
